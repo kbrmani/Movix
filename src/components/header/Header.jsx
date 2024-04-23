@@ -3,6 +3,7 @@ import { HiOutlineSearch } from "react-icons/hi";
 import { SlMenu } from "react-icons/sl";
 import { VscChromeClose } from "react-icons/vsc";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
 import "./style.scss";
 
@@ -10,6 +11,7 @@ import ContentWrapper from "../contentWrapper/ContentWrapper";
 import logo from "../../assets/movix-logo.svg";
 
 const Header = () => {
+  const { loginWithRedirect, isAuthenticated, logout, user } = useAuth0();
   const [show, setShow] = useState("top");
   const [lastScrollY, setLastScrollY] = useState(0);
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -83,6 +85,15 @@ const Header = () => {
         <ul className="menuItems">
           <li className="menuItem" onClick={()=> navigationHandler("movie")}>Movies</li>
           <li className="menuItem" onClick={()=>navigationHandler("tv")}>Tv Shows</li>
+          <li>{isAuthenticated && <p className="userName">Welcome to {user.name}</p>}</li>
+          {!isAuthenticated ? 
+          (<li><button className="loginLogoutBtn" onClick={() => loginWithRedirect()}>Log In</button></li>)
+           :  (<li> <button className="loginLogoutBtn" onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
+      Log Out
+    </button></li>)}
+          
+         
+
           <li className="menuItem"><HiOutlineSearch onClick={openSearch}/></li>
         </ul>
 

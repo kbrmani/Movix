@@ -141,6 +141,27 @@
     }
 }
 
+.userName{
+   
+    padding-right: 10px;
+    color: white;
+}
+
+.loginLogoutBtn{
+
+   padding-inline: 5px;
+   padding-block: 3px;
+   border-radius: 3px;
+   border-style: none;
+   font-size: 14px;
+   cursor: pointer;  
+}
+
+
+
+
+ 
+
 @keyframes mobileMenu {
     0% {
         transform: translateY(-130%);
